@@ -1,0 +1,21 @@
+service: browser-step-function
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+functions:
+  source:
+    handler: handler.source
+    events:
+      - schedule: rate(15 seconds)
+    environment:
+      AWS_SQS_DISPATCHER_URL: ${env:AWS_SQS_DISPATCHER_URL}
+  dispatcher:
+    handler: handler.dispatcher
+    events:
+     - sqs:
+        arn: ${env:AWS_SQS_DISPATCHER_ARN}
+        batchSize: 1
+    environment:
+      AWS_SQS_DISPATCHER_URL: ${env:AWS_SQS_DISPATCHER_URL}
+      AWS_SQS_BROWSER_URL: ${env:AWS_SQS_BROWSER_URL}
