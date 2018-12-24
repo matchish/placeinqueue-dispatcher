@@ -1,7 +1,7 @@
 FROM node:8-alpine
 
 # install curl, python tooling and other utilities
-RUN apk add --update curl python-dev py-pip screen gpgme zip && pip install --upgrade pip && \
+RUN apk add --update curl python-dev py-pip screen gpgme zip git && pip install --upgrade pip && \
 	rm -rf /var/cache/apk/*
 
 # install yarn
