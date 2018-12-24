@@ -1,8 +1,9 @@
-service: browser-step-function
+service: dispatcher
 
 provider:
   name: aws
   runtime: nodejs8.10
+  memorySize: 128
 functions:
   source:
     handler: handler.source
@@ -10,8 +11,8 @@ functions:
       - schedule: rate(1 minute)
     environment:
       AWS_SQS_DISPATCHER_URL: ${env:AWS_SQS_DISPATCHER_URL}
-  dispatcher:
-    handler: handler.dispatcher
+  spread:
+    handler: handler.spread
     events:
      - sqs:
         arn: ${env:AWS_SQS_DISPATCHER_ARN}

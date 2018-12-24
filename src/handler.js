@@ -12,7 +12,7 @@ const sqsUrls = {
   browser: AWS_SQS_BROWSER_URL,
 };
 
-module.exports.dispatcher = async (event, context) =>  {
+exports.spread = async (event, context) =>  {
     let message = event.Records.pop();
     let body = JSON.parse(message.body);
     await Promise.all(new SpreadEvents(body, dao, moment, sqsUrls).toArray().map((event) => {
@@ -29,7 +29,7 @@ module.exports.dispatcher = async (event, context) =>  {
     return { message: 'Ok' };
 };
 
-module.exports.source = async (event, context) => {
+exports.source = async (event, context) => {
     await Promise.all(new InitEvents(dao, moment, sqsUrls).toArray().map((event) => {
         return new Promise((resolve, reject) => {
             sqs.sendMessage(event, function (err, data) {
