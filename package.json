@@ -11,7 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.378.0",
     "moment": "^2.23.0",
-    "placeinqueue-dao": "github:matchish/placeinqueue-dao#87127d449ef12fbef4e9a70aa553c9944a80e77b"
+    "placeinqueue-dao": "github:matchish/placeinqueue-dao#master"
   },
   "devDependencies": {
     "chai": "^4.2.0",
