@@ -6,13 +6,13 @@ provider:
   memorySize: 128
 functions:
   source:
-    handler: handler.source
+    handler: src/handler.source
     events:
       - schedule: rate(1 minute)
     environment:
       AWS_SQS_DISPATCHER_URL: ${env:AWS_SQS_DISPATCHER_URL}
   spread:
-    handler: handler.spread
+    handler: src/handler.spread
     events:
      - sqs:
         arn: ${env:AWS_SQS_DISPATCHER_ARN}
