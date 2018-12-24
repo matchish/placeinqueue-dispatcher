@@ -8,8 +8,8 @@ const SpreadEvents = require('./spreadevents');
 const dao = require('placeinqueue-dao');
 const moment = require('moment');
 const sqsUrls = {
-  dispatcher: AWS_SQS_DISPATCHER_URL,
-  browser: AWS_SQS_BROWSER_URL,
+  dispatcher: process.env.AWS_SQS_DISPATCHER_URL,
+  browser: process.env.AWS_SQS_BROWSER_URL,
 };
 
 exports.spread = async (event, context) =>  {
