@@ -15,8 +15,10 @@ const sqsUrls = {
 exports.spread = async (event, context) =>  {
     let message = event.Records.pop();
     let body = JSON.parse(message.body);
-    await Promise.all(new SpreadEvents(body, dao, moment, sqsUrls).toArray().map((event) => {
+    let events = await new SpreadEvents(body, dao, moment, sqsUrls).toArray();
+    await Promise.all(events.map((event) => {
         return new Promise((resolve, reject) => {
+            console.log(event);
             sqs.sendMessage(event, function (err, data) {
                 if (err) {
                     reject(err);
