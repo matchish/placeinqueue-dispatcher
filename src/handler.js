@@ -35,7 +35,6 @@ exports.source = async (event, context) => {
     let events = await new InitEvents(dao, moment, sqsUrls).toArray();
     await Promise.all(events.map((event) => {
         return new Promise((resolve, reject) => {
-            console.log(event);
             sqs.sendMessage(event, function (err, data) {
                 if (err) {
                     reject(err);
