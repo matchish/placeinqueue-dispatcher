@@ -46,8 +46,8 @@ module.exports = class SpreadEvents{
                     });
                     //TODO magic constant
                     if (!place
-                        || !place.heartbeat_at
-                        || moment(place.heartbeat_at).isBefore(moment().subtract(1, 'minutes'))) {
+                        || (!place.heartbeat_at && !Number.isInteger(place.number_in_queue))
+                        || (moment(place.heartbeat_at).isBefore(moment().subtract(1, 'minutes')) && !Number.isInteger(place.number_in_queue))) {
                         return {
                             DelaySeconds: 0,
                             MessageBody: JSON.stringify({queue_id: body.queue_id, id: id}),
@@ -55,6 +55,7 @@ module.exports = class SpreadEvents{
                         };
                     }
                 }));
+                events = events.filter(e => e);
                 resolve(events);
             }
         });
