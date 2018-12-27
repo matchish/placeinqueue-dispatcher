@@ -18,7 +18,6 @@ module.exports = class InitEvents {
                         MessageBody: JSON.stringify({
                             range: [1, queue.number_of_places],
                             queue_id: queue.id,
-                            url: queue.url,
                         }),
                         //TODO env DI
                         QueueUrl: this.urls.dispatcher
