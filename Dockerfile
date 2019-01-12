@@ -19,6 +19,7 @@ RUN npm install serverless@$SERVERLESS_VERSION -g --silent
 WORKDIR "/usr/src/myserverless"
 
 COPY package.json .
+COPY package-lock.json .
 RUN npm install
 COPY . .
 
