@@ -56,7 +56,7 @@ module.exports = class SpreadEvents{
                     }
                 }));
                 events = events.filter(e => e);
-                resolve(events);
+                return resolve(events);
             }
         });
     }

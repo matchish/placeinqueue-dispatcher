@@ -32,6 +32,23 @@ exports.spread = async (event, context) =>  {
 };
 
 exports.source = async (event, context) => {
+    let params = {
+        QueueUrl : sqsUrls.browser,
+        AttributeName : ['ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible']
+    }
+    let numOfMessages = await new Promise((resolve, reject) => {
+        sqs.getQueueAttributes(params, function(err, data){
+            console.log(data)
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data.Attributes.ApproximateNumberOfMessages)
+            }
+        })
+    });
+    if (numOfMessages > 0) {
+        return { message: 'Ok' };
+    }
     let events = await new InitEvents(dao, moment, sqsUrls).toArray();
     await Promise.all(events.map((event) => {
         return new Promise((resolve, reject) => {
