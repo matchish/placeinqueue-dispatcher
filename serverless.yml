@@ -19,6 +19,7 @@ provider:
     - Effect: Allow
       Action:
         - sqs:SendMessage
+        - sqs:GetQueueAttributes
       Resource: "arn:aws:sqs:us-east-1:*:*"
 functions:
   source:
