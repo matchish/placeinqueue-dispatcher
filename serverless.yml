@@ -27,6 +27,7 @@ functions:
       - schedule: rate(1 minute)
     environment:
       AWS_SQS_DISPATCHER_URL: ${env:AWS_SQS_DISPATCHER_URL}
+      AWS_SQS_BROWSER_URL: ${env:AWS_SQS_BROWSER_URL}
   spread:
     handler: src/handler.spread
     events:

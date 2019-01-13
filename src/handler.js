@@ -34,7 +34,7 @@ exports.spread = async (event, context) =>  {
 exports.source = async (event, context) => {
     let params = {
         QueueUrl : sqsUrls.browser,
-        AttributeName : ['ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible']
+        AttributeNames : ['ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesNotVisible']
     }
     let numOfMessages = await new Promise((resolve, reject) => {
         sqs.getQueueAttributes(params, function(err, data){
